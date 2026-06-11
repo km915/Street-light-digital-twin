@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: slt_postgres
+    environment:
+      POSTGRES_DB:       streetlight_twin
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  flask:
+    build: ./ml
+    container_name: slt_flask
+    volumes:
+      - ./ml/models:/app/models
+    ports:
+      - "5001:5001"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5001/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: slt_backend
+    environment:
+      DATABASE_URL:    postgresql://postgres:postgres@postgres:5432/streetlight_twin
+      FLASK_API_URL:   http://flask:5001
+      JWT_SECRET:      change_this_in_production
+      PORT:            3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      flask:
+        condition: service_healthy
+    volumes:
+      - ./ml:/app/../ml
+
+  frontend:
+    build: ./frontend
+    container_name: slt_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

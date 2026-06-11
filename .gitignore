@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.pkl
+ml/synthetic_data.csv
+ml/models/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# Environment
+.env
+.env.local
+.env.production.local
+backend/.env
+
+# Database
+*.sql.bak
+postgres_data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

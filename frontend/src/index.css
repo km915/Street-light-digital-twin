@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── base dark defaults ────────────────────────────────────────────────────── */
+html.dark body {
+  background-color: rgb(3 7 18);
+  color: rgb(209 213 219);
+}
+
+/* backgrounds */
+html.dark .bg-white        { background-color: rgb(17 24 39)  !important; }
+html.dark .bg-gray-50      { background-color: rgb(11 17 32)  !important; }
+html.dark .bg-gray-100     { background-color: rgb(31 41 55)  !important; }
+html.dark .bg-amber-50     { background-color: rgb(41 35 18)  !important; }
+html.dark .bg-red-50       { background-color: rgb(40 18 18)  !important; }
+html.dark .bg-blue-50      { background-color: rgb(15 30 55)  !important; }
+html.dark .bg-green-50     { background-color: rgb(15 40 30)  !important; }
+
+/* borders */
+html.dark .border-gray-200  { border-color: rgb(55 65 81)   !important; }
+html.dark .border-gray-100  { border-color: rgb(45 55 72)   !important; }
+html.dark .border-amber-200 { border-color: rgb(92 72 20)   !important; }
+html.dark .border-blue-200  { border-color: rgb(30 58 138)  !important; }
+html.dark .border-red-200   { border-color: rgb(127 29 29)  !important; }
+
+/* text */
+html.dark .text-gray-800 { color: rgb(229 231 235) !important; }
+html.dark .text-gray-700 { color: rgb(209 213 219) !important; }
+html.dark .text-gray-600 { color: rgb(156 163 175) !important; }
+html.dark .text-gray-500 { color: rgb(107 114 128) !important; }
+html.dark .text-gray-400 { color: rgb(75 85 99)   !important; }
+html.dark .text-amber-800 { color: rgb(217 172 80) !important; }
+
+/* table rows */
+html.dark tr:hover td { background-color: rgb(31 41 55) !important; }
+html.dark thead th    { background-color: rgb(17 24 39) !important;
+                        color: rgb(107 114 128)         !important; }
+
+/* inputs and selects */
+html.dark input, html.dark select, html.dark textarea {
+  background-color: rgb(31 41 55) !important;
+  color:            rgb(209 213 219) !important;
+  border-color:     rgb(55 65 81)  !important;
+}
+
+html.dark input::placeholder { color: rgb(107 114 128) !important; }
+
+/* shadow adjustment */
+html.dark .shadow-sm {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4) !important;
+}
+
+/* cards */
+html.dark .rounded-xl.border { border-color: rgb(55 65 81) !important; }
